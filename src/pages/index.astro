@@ -1,0 +1,116 @@
+---
+import "../styles/global.css";
+
+const BASE_URL = "https://kmeme.itzdrli.cc";
+const MEME_ENDPOINT = `${BASE_URL}/meme/rand`;
+
+/**
+ * Fetch an initial meme on the server so the first render is populated.
+ */
+let meme;
+
+try {
+  const response = await fetch(MEME_ENDPOINT);
+  if (response.ok) {
+    const payload = await response.json();
+    const data = payload?.data;
+    if (data?.imageUrl && data?.title) {
+      meme = {
+        title: data.title,
+        imageUrl: new URL(data.imageUrl, BASE_URL).toString(),
+      };
+    }
+  }
+} catch (error) {
+  console.error("Failed to load initial meme", error);
+}
+
+meme ??= {
+  title: "Loading…",
+  imageUrl: "https://placehold.co/640x480?text=Loading",
+};
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Koishi Memes</title>
+	</head>
+	<body class="min-h-screen bg-[#2e3440] text-[#eceff4] flex items-center justify-center p-4 font-sans">
+		<main class="w-full max-w-3xl">
+			<section class="relative mx-auto flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-[#4c566a] p-8 shadow-2xl backdrop-blur-xl">
+				<div class="w-full overflow-hidden rounded-2xl bg-[#2e3440] shadow-lg">
+					<img
+						id="memeImage"
+						src={meme.imageUrl}
+						alt={meme.title}
+						loading="lazy"
+						class="h-full w-full object-cover"
+					/>
+				</div>
+				<h1 id="memeTitle" class="text-3xl font-semibold tracking-tight"># {meme.title}</h1>
+				<button
+					id="refreshButton"
+					type="button"
+					class="rounded-full bg-[#5e81ac] px-8 py-3 text-lg font-medium text-[#eceff4] transition hover:bg-[#81a1c1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5e81ac] disabled:cursor-not-allowed disabled:bg-[#5e81ac]"
+				>
+					再来一个
+				</button>
+				<p id="errorMessage" class="text-sm text-[#bf616a] opacity-0 transition-opacity">加载失败，请稍后再试。</p>
+			</section>
+		</main>
+
+		<script type="module">
+			const BASE_URL = "https://kmeme.itzdrli.cc";
+			const MEME_ENDPOINT = `${BASE_URL}/meme/rand`;
+			const image = document.getElementById("memeImage");
+			const title = document.getElementById("memeTitle");
+			const button = document.getElementById("refreshButton");
+			const errorMessage = document.getElementById("errorMessage");
+
+			async function loadMeme() {
+				if (!button) {
+					return;
+				}
+
+				errorMessage?.classList.add("opacity-0");
+				const originalLabel = button.textContent;
+				button.textContent = "Loading...";
+				button.disabled = true;
+
+				try {
+					const response = await fetch(MEME_ENDPOINT, { cache: "no-store" });
+					if (!response.ok) {
+						throw new Error(`Request failed with status ${response.status}`);
+					}
+
+					const payload = await response.json();
+					const data = payload?.data;
+					if (!data?.imageUrl || !data?.title) {
+						throw new Error("Invalid response payload");
+					}
+
+					const imageUrl = new URL(data.imageUrl, BASE_URL).toString();
+					if (image) {
+						image.src = imageUrl;
+						image.alt = data.title;
+					}
+					if (title) {
+						title.textContent = "# " + data.title;
+					}
+				} catch (error) {
+					console.error("Failed to load meme", error);
+					errorMessage?.classList.remove("opacity-0");
+				} finally {
+					button.textContent = originalLabel;
+					button.disabled = false;
+				}
+			}
+
+			button?.addEventListener("click", loadMeme);
+		</script>
+	</body>
+</html>
