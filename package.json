@@ -1,19 +1,25 @@
 {
+  "name": "memes-none-bot",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "oxlint app"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
-    "astro": "^5.15.3",
-    "tailwindcss": "^4.1.16"
+    "nuxt": "^4.0.0",
+    "tailwindcss": "^4.1.16",
+    "vue": "^3.5.0"
   },
   "devDependencies": {
-    "vite": "^5.4.10"
+    "oxlint": "^1.0.0",
+    "vite": "^8.0.16"
   },
   "packageManager": "yarn@4.10.3"
 }

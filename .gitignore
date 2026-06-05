@@ -1,7 +1,9 @@
 # build output
 dist/
-# generated types
-.astro/
+.output/
+# nuxt
+.nuxt/
+.data/
 
 # dependencies
 node_modules/
@@ -22,3 +24,4 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+.yarn/install-state.gz
