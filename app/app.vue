@@ -6,7 +6,8 @@ const active = ref<Meme | null>(null);
 </script>
 
 <template>
-  <div class="min-h-screen bg-nord0 text-nord6">
+  <VueLenis root :options="{ duration: 1.1 }">
+    <div class="min-h-screen bg-nord0 text-nord6">
     <header
       class="sticky top-0 z-30 border-b border-white/5 bg-nord0/80 backdrop-blur-md"
     >
@@ -44,5 +45,6 @@ const active = ref<Meme | null>(null);
     <SiteFooter />
 
     <MemeModal :meme="active" @close="active = null" />
-  </div>
+    </div>
+  </VueLenis>
 </template>

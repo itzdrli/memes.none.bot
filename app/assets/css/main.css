@@ -1,3 +1,4 @@
+@import "lenis/dist/lenis.css";
 @import "tailwindcss";
 
 /* Nord palette — https://www.nordtheme.com/ */
@@ -25,7 +26,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   background-color: var(--color-nord0);
   color-scheme: dark;
 }

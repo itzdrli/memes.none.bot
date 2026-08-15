@@ -5,10 +5,16 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-06-05",
   devtools: { enabled: false },
 
+  modules: ["lenis/nuxt"],
+
   css: ["~/assets/css/main.css"],
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      // Tailscale MagicDNS: single-label host "s" + any *.ts.net host
+      allowedHosts: ["s", ".ts.net"],
+    },
   },
 
   app: {
