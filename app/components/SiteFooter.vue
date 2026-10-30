@@ -11,7 +11,6 @@ const year = new Date().getFullYear();
     >
       <div class="flex flex-col items-center gap-2 sm:items-start">
         <AppLogo />
-        <p class="text-nord-4">Koishi 相关的 meme 合集，每一张都来自群友投稿。</p>
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-2">
