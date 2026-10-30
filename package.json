@@ -4,14 +4,17 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "dev": "node scripts/fetch-fonts.mjs && nuxt dev",
+    "build": "node scripts/fetch-fonts.mjs && nuxt build",
+    "generate": "node scripts/fetch-fonts.mjs && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
     "lint": "oxlint app"
   },
   "dependencies": {
+    "@lucide/vue": "^1.65.0",
     "@tailwindcss/vite": "^4.1.16",
     "lenis": "^1.3.26",
     "nuxt": "^4.0.0",
@@ -20,7 +23,9 @@
   },
   "devDependencies": {
     "oxlint": "^1.0.0",
-    "vite": "^8.0.16"
+    "typescript": "^5.9.3",
+    "vite": "^8.0.16",
+    "vue-tsc": "^3"
   },
   "packageManager": "yarn@4.10.3"
 }

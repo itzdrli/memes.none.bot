@@ -135,26 +135,23 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
-    <div class="flex items-start gap-4">
+    <div class="flex items-start gap-3">
       <div
         v-for="(col, ci) in cols"
         :key="ci"
         :ref="(el) => setColRef(el as Element | null, ci)"
-        class="flex min-w-0 flex-1 flex-col gap-4"
+        class="flex min-w-0 flex-1 flex-col gap-3"
       >
-        <MemeCard
-          v-for="meme in col"
-          :key="meme.id"
-          :meme="meme"
-          @open="emit('open', $event)"
-        />
+        <MemeCard v-for="meme in col" :key="meme.id" :meme="meme" @open="emit('open', $event)" />
       </div>
     </div>
 
     <div ref="sentinel" class="h-12"></div>
 
-    <p v-if="done" class="py-6 text-center text-sm text-nord3">
-      — 已经到底啦 —
+    <p v-if="done" class="flex items-center gap-3 py-6 text-nord-4/70">
+      <span class="h-px flex-1 bg-nord-3" />
+      已经到底啦 · {{ items.length }} 张
+      <span class="h-px flex-1 bg-nord-3" />
     </p>
   </div>
 </template>

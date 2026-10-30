@@ -1,31 +1,142 @@
 @import "lenis/dist/lenis.css";
 @import "tailwindcss";
 
-/* Nord palette — https://www.nordtheme.com/ */
+/*
+ * Palettes shared with FantasticFrame (app/assets/css/main.css there). The
+ * names are luminance roles, not hues: 0 = page bg, 1 = raised panel,
+ * 2 = control bg, 3 = border, 4..6 = text muted → strong, 8/9 = accent,
+ * 11 = danger, 12..15 = accents. Set via <html data-theme>; the list of
+ * themes lives in app/composables/useTheme.ts.
+ */
 @theme {
-  /* Polar Night */
-  --color-nord0: #2e3440;
-  --color-nord1: #3b4252;
-  --color-nord2: #434c5e;
-  --color-nord3: #4c566a;
-  /* Snow Storm */
-  --color-nord4: #d8dee9;
-  --color-nord5: #e5e9f0;
-  --color-nord6: #eceff4;
-  /* Frost */
-  --color-nord7: #8fbcbb;
-  --color-nord8: #88c0d0;
-  --color-nord9: #81a1c1;
-  --color-nord10: #5e81ac;
-  /* Aurora */
-  --color-nord11: #bf616a;
-  --color-nord12: #d08770;
-  --color-nord13: #ebcb8b;
-  --color-nord14: #a3be8c;
-  --color-nord15: #b48ead;
+  /* Default "Graphite": neutral grey, so the memes are the only colour on screen */
+  --color-nord-0: #1b1b1b;
+  --color-nord-1: #262626;
+  --color-nord-2: #303030;
+  --color-nord-3: #444444;
+  --color-nord-4: #a1a1a1;
+  --color-nord-5: #c4c4c4;
+  --color-nord-6: #ececec;
+  --color-nord-7: #8cb8e8;
+  --color-nord-8: #5aa2ee;
+  --color-nord-9: #4a88d0;
+  --color-nord-10: #3b6fb0;
+  --color-nord-11: #e0645c;
+  --color-nord-12: #e08a4f;
+  --color-nord-13: #d9bb62;
+  --color-nord-14: #7cc08a;
+  --color-nord-15: #b393d6;
+
+  --font-sans: "IBM Plex Sans", "Noto Sans SC", system-ui, sans-serif;
+}
+
+/* Nord, the site's original palette */
+:root[data-theme="nord"] {
+  --color-nord-0: #2e3440;
+  --color-nord-1: #3b4252;
+  --color-nord-2: #434c5e;
+  --color-nord-3: #4c566a;
+  --color-nord-4: #d8dee9;
+  --color-nord-5: #e5e9f0;
+  --color-nord-6: #eceff4;
+  --color-nord-7: #8fbcbb;
+  --color-nord-8: #88c0d0;
+  --color-nord-9: #81a1c1;
+  --color-nord-10: #5e81ac;
+  --color-nord-11: #bf616a;
+  --color-nord-12: #d08770;
+  --color-nord-13: #ebcb8b;
+  --color-nord-14: #a3be8c;
+  --color-nord-15: #b48ead;
+}
+
+/* Frost: light, cool, cyan-on-light accent */
+:root[data-theme="frost"] {
+  --color-nord-0: #e7ecf2;
+  --color-nord-1: #f8fafc;
+  --color-nord-2: #edf1f6;
+  --color-nord-3: #cbd5e1;
+  --color-nord-4: #4a5870;
+  --color-nord-5: #33415a;
+  --color-nord-6: #1f2a3a;
+  --color-nord-7: #0f85a5;
+  --color-nord-8: #0e7490;
+  --color-nord-9: #155e75;
+  --color-nord-10: #3d6ba5;
+  --color-nord-11: #b8342f;
+  --color-nord-12: #c2601c;
+  --color-nord-13: #8f6f1f;
+  --color-nord-14: #3e8e4e;
+  --color-nord-15: #8550b4;
+}
+
+/* Sand: warm paper tones with an umber accent */
+:root[data-theme="sand"] {
+  --color-nord-0: #efe7d9;
+  --color-nord-1: #faf6ec;
+  --color-nord-2: #f1e9da;
+  --color-nord-3: #ddd0b9;
+  --color-nord-4: #5b4e3c;
+  --color-nord-5: #4a3f2f;
+  --color-nord-6: #2e2518;
+  --color-nord-7: #9a6b2f;
+  --color-nord-8: #8a5a23;
+  --color-nord-9: #6f4819;
+  --color-nord-10: #5b6e96;
+  --color-nord-11: #a63d32;
+  --color-nord-12: #b05e23;
+  --color-nord-13: #84661f;
+  --color-nord-14: #5c7a43;
+  --color-nord-15: #735191;
+}
+
+/* Dusk: near-black neutral grey with a pale cyan accent */
+:root[data-theme="dusk"] {
+  --color-nord-0: #0d0f13;
+  --color-nord-1: #191c22;
+  --color-nord-2: #20242c;
+  --color-nord-3: #2e343e;
+  --color-nord-4: #b8c0cc;
+  --color-nord-5: #cad1dc;
+  --color-nord-6: #edf1f7;
+  --color-nord-7: #93c5d8;
+  --color-nord-8: #6fc3de;
+  --color-nord-9: #57acc9;
+  --color-nord-10: #7ea6d8;
+  --color-nord-11: #ef8b96;
+  --color-nord-12: #e5a271;
+  --color-nord-13: #d9c07b;
+  --color-nord-14: #9bd0a5;
+  --color-nord-15: #c09be0;
+}
+
+/* Native controls (scrollbars, inputs) follow the theme */
+:root {
+  color-scheme: dark;
+}
+:root[data-theme="frost"],
+:root[data-theme="sand"] {
+  color-scheme: light;
 }
 
 html {
-  background-color: var(--color-nord0);
-  color-scheme: dark;
+  background-color: var(--color-nord-0);
+}
+
+body {
+  @apply bg-nord-0 text-nord-5 font-sans antialiased;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* iOS Safari zooms the page when focusing an input below 16px */
+@media (max-width: 767px), (pointer: coarse) {
+  input {
+    font-size: 16px;
+  }
+}
+
+/* The native search clear button fights the flat look; we draw our own */
+input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
 }

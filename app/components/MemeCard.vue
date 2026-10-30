@@ -7,19 +7,19 @@ const emit = defineEmits<{ open: [meme: Meme] }>();
 
 <template>
   <figure
-    class="group cursor-zoom-in overflow-hidden rounded-xl bg-nord1 ring-1 ring-white/5 transition duration-200 hover:-translate-y-0.5 hover:ring-nord8/60"
+    class="group cursor-zoom-in overflow-hidden rounded-[2px] border border-nord-3 bg-nord-1 outline-none transition-colors duration-150 hover:border-nord-8 focus-visible:border-nord-8"
+    tabindex="0"
+    role="button"
+    :aria-label="meme.title"
     @click="emit('open', meme)"
+    @keydown.enter.prevent="emit('open', meme)"
+    @keydown.space.prevent="emit('open', meme)"
   >
-    <img
-      :src="meme.imageUrl"
-      :alt="meme.title"
-      decoding="async"
-      class="block w-full bg-nord0/40"
-    />
+    <img :src="meme.imageUrl" :alt="meme.title" decoding="async" class="block w-full bg-nord-2" />
     <figcaption
-      class="truncate px-3 py-2.5 text-base text-nord4 transition-colors group-hover:text-nord6"
+      class="truncate border-t border-nord-3 px-2.5 py-2 text-nord-5 transition-colors group-hover:text-nord-6"
     >
-      # {{ meme.title }}
+      <span class="text-nord-4/70">#</span> {{ meme.title }}
     </figcaption>
   </figure>
 </template>
